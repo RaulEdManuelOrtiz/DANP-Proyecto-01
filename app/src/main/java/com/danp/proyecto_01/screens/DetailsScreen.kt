@@ -13,7 +13,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun DetailsScreen() {
+fun DetailsScreen(license: String?) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -31,5 +31,5 @@ fun DetailsScreen() {
 @Composable
 @Preview
 fun DetailsScreenPreview() {
-    DetailsScreen()
+    DetailsScreen("")
 }

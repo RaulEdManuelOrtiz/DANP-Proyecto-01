@@ -15,10 +15,14 @@ fun BottomNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable(route = BottomBarScreen.Details.route) {
-            DetailsScreen()
+            DetailsScreen("")
+        }
+        composable(route = BottomBarScreen.Details.route + "/{license}") {
+            val license = it.arguments?.getString("license")
+            DetailsScreen(license)
         }
         composable(route = BottomBarScreen.Historial.route) {
             HistorialScreen()
