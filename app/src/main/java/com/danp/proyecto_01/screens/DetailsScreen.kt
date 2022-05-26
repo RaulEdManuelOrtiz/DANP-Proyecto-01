@@ -21,25 +21,24 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun DetailsScreen() {
+fun DetailsScreen(license: String?) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .fillMaxWidth(),
         ) {
-        Placa()
+        Placa(license)
     }
 }
 
 @Composable
 @Preview
 fun DetailsScreenPreview() {
-    DetailsScreen()
+    DetailsScreen("")
 }
 
-@Preview
 @Composable
-fun Placa() {
+fun Placa(license: String?) {
     Column(
 //        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
@@ -76,14 +75,16 @@ fun Placa() {
                 ,
                 border = BorderStroke(1.dp, Color.Black),
             ) {
-                Text(
-                    text = "X2R - 658",
-                    fontSize = MaterialTheme.typography.h3.fontSize,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    color = Color(0xFF60708F)
+                if (license != null) {
+                    Text(
+                        text = license,
+                        fontSize = MaterialTheme.typography.h3.fontSize,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        color = Color(0xFF60708F)
 
-                )
+                    )
+                }
 
             }
         }

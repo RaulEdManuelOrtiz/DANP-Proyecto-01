@@ -4,9 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.danp.proyecto_01.screens.DetailsScreen
-import com.danp.proyecto_01.screens.HistorialScreen
-import com.danp.proyecto_01.screens.HomeScreen
+import com.danp.proyecto_01.screens.*
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
@@ -15,13 +13,17 @@ fun BottomNavGraph(navController: NavHostController) {
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable(route = BottomBarScreen.Details.route) {
-            DetailsScreen()
+            DetailsScreen("NO DATA")
+        }
+        composable(route = BottomBarScreen.Details.route + "/{license}") {
+            val license = it.arguments?.getString("license")
+            DetailsScreen(license)
         }
         composable(route = BottomBarScreen.Historial.route) {
-            HistorialScreen()
+            Conversation(SampleData.autos)
         }
     }
 }

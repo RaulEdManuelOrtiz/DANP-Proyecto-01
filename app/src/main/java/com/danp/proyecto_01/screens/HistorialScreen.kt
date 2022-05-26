@@ -1,16 +1,96 @@
 package com.danp.proyecto_01.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import android.content.Intent
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@Composable
+fun MessageCard(auto: Message) {
+    Row(modifier = Modifier.padding(all = 8.dp)) {
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        var isExpanded by remember { mutableStateOf(false) }
+        val surfaceColor by animateColorAsState(
+            if (isExpanded) MaterialTheme.colors.primary else MaterialTheme.colors.surface,
+        )
+
+        Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
+            Text(
+                text = auto.placa,
+                color = MaterialTheme.colors.secondaryVariant,
+                style = MaterialTheme.typography.subtitle2,
+                fontSize = MaterialTheme.typography.h5.fontSize,
+            )
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Surface(
+                shape = MaterialTheme.shapes.medium,
+                elevation = 1.dp,
+                color = surfaceColor,
+                modifier = Modifier.animateContentSize().padding(1.dp)
+            ) {
+                Text(
+                    text = auto.descripcion,
+                    modifier = Modifier.padding(all = 4.dp),
+                    maxLines = if (isExpanded) Int.MAX_VALUE else 1,
+                    style = MaterialTheme.typography.body2
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun Conversation(messages: List<Message>) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.TopCenter
+    ) {
+        Text(
+            text = "HISTORIAL",
+            fontSize = MaterialTheme.typography.h3.fontSize,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+    ){
+        Row(modifier = Modifier.padding(top = 60.dp)) {
+
+            LazyColumn {
+                items(messages) { message ->
+                    MessageCard(message)
+                }
+            }
+        }
+
+    }
+}
+
 
 @Composable
 fun HistorialScreen() {
@@ -20,7 +100,7 @@ fun HistorialScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "HISTORIAL",
+            text = "HISTORI2AL",
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold,
             color = Color.Black
@@ -31,5 +111,7 @@ fun HistorialScreen() {
 @Composable
 @Preview
 fun HistorialScreenPreview() {
-    HistorialScreen()
+    //HistorialScreen()
+    Conversation(SampleData.autos)
 }
+
