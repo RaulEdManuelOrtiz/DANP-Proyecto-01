@@ -2,23 +2,26 @@ package com.danp.proyecto_01.screens
 
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberAsyncImagePainter
 import com.danp.proyecto_01.BottomBarScreen
 
 const val maxLength = 6
@@ -48,8 +51,20 @@ fun HomeScreen(navController: NavHostController) {
             text = "EasyPlate",
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = Color(0xFF093980),
         )
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth(),
+        ) {
+            Image(
+                painter = rememberAsyncImagePainter("https://www.manualesdetodo.net/wp-content/uploads/2020/01/b8-1980-1536x782.png"),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(250.dp)
+                )
+        }
         OutlinedTextField(
             value = license,
             placeholder = { Text(text = "Ingrese el código de la placa") },
@@ -64,6 +79,7 @@ fun HomeScreen(navController: NavHostController) {
                 onSearch = { navigateToDetails(navController, license, context) }
             )
         )
+
     }
 }
 

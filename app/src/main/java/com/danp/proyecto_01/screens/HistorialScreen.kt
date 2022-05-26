@@ -31,13 +31,13 @@ fun MessageCard(auto: Message) {
 
         var isExpanded by remember { mutableStateOf(false) }
         val surfaceColor by animateColorAsState(
-            if (isExpanded) MaterialTheme.colors.primary else MaterialTheme.colors.surface,
+            if (isExpanded) Color(0xFFF0F4FB) else Color.White,
         )
 
         Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
             Text(
                 text = auto.placa,
-                color = MaterialTheme.colors.secondaryVariant,
+                color = Color(0xFF1873B9)                ,
                 style = MaterialTheme.typography.subtitle2,
                 fontSize = MaterialTheme.typography.h5.fontSize,
             )
@@ -72,7 +72,7 @@ fun Conversation(messages: List<Message>) {
             text = "HISTORIAL",
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = Color(0xFF093980),
         )
     }
     Box(
@@ -103,7 +103,7 @@ fun HistorialScreen() {
             text = "HISTORI2AL",
             fontSize = MaterialTheme.typography.h3.fontSize,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = Color(0xFF093980),
         )
     }
 }
